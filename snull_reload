@@ -1,0 +1,14 @@
+#!/bin/bash
+
+/sbin/ifconfig sn0 down
+/sbin/ifconfig sn1 down
+/sbin/rmmod snull
+
+export PATH=/sbin:/bin
+
+# Use a pathname, as new modutils don't look in the current dir by default
+sleep 1
+
+insmod ./snull.ko $*
+ifconfig sn0 local0
+ifconfig sn1 local1
